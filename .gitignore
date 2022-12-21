@@ -1,0 +1,13 @@
+.DS_Store
+
+lex.yy.c
+yacc.tab.c
+yacc.tab.h
+compiler
+Grammatical
+Lexical
+Innercode
+assembly
+assembly.asm
+test.o test
+assembly.out
