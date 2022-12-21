@@ -1,4 +1,5 @@
 .DS_Store
+.vscode
 
 lex.yy.c
 yacc.tab.c
