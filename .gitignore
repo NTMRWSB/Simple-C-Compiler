@@ -10,5 +10,6 @@ Lexical
 Innercode
 assembly
 assembly.asm
-test.o test
+test.o
+test
 assembly.out
