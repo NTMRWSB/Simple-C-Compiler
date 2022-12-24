@@ -6,7 +6,7 @@
 #include <stdarg.h>
 #define MAX_LENGTH 5
 #define MAX_SIZE 1000
-struct Node* head ;
+extern struct Node* head;
 
 Node* getNodeByDoubleVar(char* op, char* var0, char* var1,int inner_count){
     Node *p = head;
