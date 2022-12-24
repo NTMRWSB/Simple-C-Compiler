@@ -18,7 +18,7 @@
     int preType;
 
     Tree* root;
-    extern Node *head;
+    Node *head;
     //中间代码生成
     int line_count=1;
    
