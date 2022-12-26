@@ -72,7 +72,7 @@ make file=<filename> 	//filename指要编译的c语言代码文件，默认文�
 
 **项目架构图**
 
-![流程](%E6%B5%81%E7%A8%8B.png)
+![流程](liucheng.png)
 
 _____
 #### 1.词法分析
@@ -95,8 +95,91 @@ _____
 
 词法分析结果:
 
-<img src="./image/word.png" alt="word.png" width="50%" />
+```
+单词         	词素         	属性
+INT            	int            
+MAIN           	main           
+LP             	(              
+RP             	)              
+LCB            	{              
+INT            	int            
+ID             	a              0x5604106792a0
+ASSIGN         	=              
+INT10          	8              8
+SEMICOLON      	;              
+INT            	int            
+ID             	b              0x5604106792a0
+ASSIGN         	=              
+INT10          	10             10
+SEMICOLON      	;              
+IF             	if             
+LP             	(              
+ID             	a              0x5604106792a0
+EQ             	==             
+INT10          	8              8
+RP             	)              
+LCB            	{              
+OUTPUT         	output_int     
+LP             	(              
+ID             	a              0x5604106792a0
+RP             	)              
+SEMICOLON      	;              
+RCB            	}              
+INT            	int            
+ID             	i              0x5604106792a0
+ASSIGN         	=              
+INT10          	2              2
+SEMICOLON      	;              
+FOR            	for            
+LP             	(              
+SEMICOLON      	;              
+ID             	i              0x5604106792a0
+LT             	<              
+INT10          	3              3
+SEMICOLON      	;              
+ID             	i              0x5604106792a0
+ASSIGN         	=              
+ID             	i              0x5604106792a0
+ADD            	+              
+INT10          	1              1
+RP             	)              
+LCB            	{              
+OUTPUT         	output_int     
+LP             	(              
+ID             	b              0x5604106792a0
+RP             	)              
+SEMICOLON      	;              
+RCB            	}              
+INT            	int            
+ID             	c              0x5604106792a0
+ASSIGN         	=              
+ID             	b              0x5604106792a0
+MOD            	%              
+ID             	a              0x5604106792a0
+SEMICOLON      	;              
+OUTPUT         	output_int     
+LP             	(              
+ID             	c              0x5604106792a0
+RP             	)              
+SEMICOLON      	;              
+INT            	int            
+ID             	d              0x5604106792a0
+ASSIGN         	=              
+INT10          	5              5
+POW            	^              
+INT10          	2              2
+SEMICOLON      	;              
+OUTPUT         	output_int     
+LP             	(              
+ID             	d              0x5604106792a0
+RP             	)              
+SEMICOLON      	;              
+RETURN         	return         
+INT10          	0              0
+SEMICOLON      	;              
+RCB            	}              
 
+```
 #### 2.语法分析
 
 ​使用yacc接受lex产生的token，并对程序的语法进行语法分析，最终打印出抽象语法树。
@@ -220,7 +303,83 @@ Tree* createTree(char* name, int number, ...){		//c语言可变长参数
 
 ​	语法树示例：
 
-<img src="./image/tree.png" alt="tree.png" width="60%" />
+```
+Main Func
+    INT int
+    MAIN main
+    LP (
+    RP )
+    LCB {
+    sentence
+        declare_expression
+            INT int
+            assignment_expression =
+                ID a
+                INT10 8
+        sentence
+            declare_expression
+                INT int
+                assignment_expression =
+                    ID b
+                    INT10 10
+            sentence
+                if_expression
+                    equality_expression ==
+                        ID a
+                        INT10 8
+                    statement
+                        LCB {
+                        output
+                            OUTPUT output_int
+                            ID a
+                        RCB }
+                sentence
+                    declare_expression
+                        INT int
+                        assignment_expression =
+                            ID i
+                            INT10 2
+                    sentence
+                        for_expression
+                            null
+                            relational_expression <
+                                ID i
+                                INT10 3
+                            assignment_expression =
+                                ID i
+                                additive_expression +
+                                    ID i
+                                    INT10 1
+                        sentence
+                            declare_expression
+                                INT int
+                                assignment_expression =
+                                    ID c
+                                    multiplicative_expression %
+                                        ID b
+                                        ID a
+                            sentence
+                                output
+                                    OUTPUT output_int
+                                    ID c
+                                sentence
+                                    declare_expression
+                                        INT int
+                                        assignment_expression =
+                                            ID d
+                                            multiplicative_expression ^
+                                                INT10 5
+                                                INT10 2
+                                    sentence
+                                        output
+                                            OUTPUT output_int
+                                            ID d
+                                        return_expression
+                                            RETURN return
+                                            INT10 0
+    RCB }
+
+```
 
 
 
@@ -351,7 +510,34 @@ Node* getNodeByDoubleVar(char* op, char* var0, char* var1,int inner_count){
 
 ​	中间代码运行结果:
 
-<img src="./image/innercode.png" alt="innercode.png" width="60%" />
+```
+1: a = 8
+2: b = 10
+3: t1 = a == 8
+4: if t1 goto 6
+5: goto 8
+6: arg a
+7: call output
+8: i = 2
+9: t2 = i < 3
+10: if t2 goto 12
+11: goto 17
+12: arg b
+13: call output
+14: t3 = i + 1
+15: i = t3
+16: goto 9
+17: t4 = b % a
+18: c = t4
+19: arg c
+20: call output
+21: t5 = 5 ^ 2
+22: d = t5
+23: arg d
+24: call output
+25: return 0
+
+```
 
 #### 3.类型检查:
 
