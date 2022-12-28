@@ -41,7 +41,7 @@
 
 #### 0.环境准备及使用说明
 
-​Windows WSL2.0（Ubuntu）或 Ubuntu22.04.1，请不要在ARM平台下编译该项目，可能出现意想不到的错误
+运行环境：​Windows WSL2.0（Ubuntu）或 Ubuntu 22.04 LTS，请不要在ARM平台下编译该项目，可能出现意想不到的错误
 #### 安装必要的编译组件：
 ```
 sudo apt install build-essential
@@ -60,7 +60,7 @@ make //默认文件名为test
 ```
 或
 ```
-make file=<filename> 	//filename指要编译的c语言代码文件，默认文件名为test
+make file=<filename> 	//filename指要编译的c语言代码文件
 ```
 分析结果在当前目录下
 
