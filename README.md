@@ -56,13 +56,17 @@ sudo apt install cmake
 ```
 #### ​在文件根目录下运行：
 ```
+make //默认文件名为test
+```
+或
+```
 make file=<filename> 	//filename指要编译的c语言代码文件，默认文件名为test
 ```
 分析结果在当前目录下
 
-词法分析： `Lexical`
+词法分析：`Lexical`
 
-语法分析: `Grammatical`
+语法分析：`Grammatical`
 
 中间代码：`InnerCode`
 
