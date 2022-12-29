@@ -761,6 +761,101 @@ Node* getNodeByDoubleVar(char* op, char* var0, char* var1,int inner_count){
     }
   }
 ```
+汇编代码的生成结果：
+```
+extern printf, scanf
+global main
+main:
+        enter 100, 0
+        mov eax,8
+        mov [rbp-4],eax
+        mov eax,10
+        mov [rbp-8],eax
+        mov eax,[rbp-4]
+        mov ebx,8
+        mov [rbp-12],eax
+CODE1:
+        mov eax,[rbp-4]
+        mov ebx,8
+        cmp eax,ebx
+        je CODE3
+CODE2:
+        jmp CODE4
+CODE3:
+        sub rsp, 8
+        mov rsi,[rbp-4]
+        mov rdi, out_format
+        xor rax, rax
+        call printf
+        xor rax, rax
+        add rsp, 8
+CODE4:
+        mov eax,2
+        mov [rbp-16],eax
+CODE5:
+        mov eax,[rbp-16]
+        mov ebx,3
+        mov [rbp-20],eax
+CODE6:
+        mov eax,[rbp-16]
+        mov ebx,3
+        cmp eax,ebx
+        jb CODE8
+CODE7:
+        jmp CODE10
+CODE8:
+        sub rsp, 8
+        mov rsi,[rbp-8]
+        mov rdi, out_format
+        xor rax, rax
+        call printf
+        xor rax, rax
+        add rsp, 8
+        mov eax,[rbp-16]
+        mov ebx,1
+        add eax,ebx
+        mov [rbp-24],eax
+        mov eax,[rbp-24]
+        mov [rbp-16],eax
+CODE9:
+        jmp CODE5
+CODE10:
+        mov eax,[rbp-8]
+        mov ebx,[rbp-4]
+        div ebx
+        mov eax,edx
+        mov [rbp-32],eax
+        mov eax,[rbp-32]
+        mov [rbp-36],eax
+        sub rsp, 8
+        mov rsi,[rbp-36]
+        mov rdi, out_format
+        xor rax, rax
+        call printf
+        xor rax, rax
+        add rsp, 8
+        mov eax,5
+        mov ebx,2
+        times 2 mul eax
+        mov [rbp-40],eax
+        mov eax,[rbp-40]
+        mov [rbp-44],eax
+        sub rsp, 8
+        mov rsi,[rbp-44]
+        mov rdi, out_format
+        xor rax, rax
+        call printf
+        xor rax, rax
+        add rsp, 8
+        leave
+        ret
+
+section .data
+        out_format: db "%#d", 10, 0
+        in_format: db "%d", 0
+section .bss
+        number resb 4
+```
 
 ### 五、实验遗憾
 
